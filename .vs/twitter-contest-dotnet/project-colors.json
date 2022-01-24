@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "01ca2346-18ef-4ef9-abf7-cdd0f2ac0fc7": {
+      "ProjectGuid": "01ca2346-18ef-4ef9-abf7-cdd0f2ac0fc7",
+      "DisplayName": "twitter-contest-dotnet",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}

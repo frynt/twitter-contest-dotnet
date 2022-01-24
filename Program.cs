@@ -1,4 +1,10 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using twitter_contest_dotnet.Data;
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<twitter_contest_dotnetContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("twitter_contest_dotnetContext")));
 
 // Add services to the container.
 
