@@ -1,9 +1,14 @@
-﻿namespace twitter_contest_dotnet.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace twitter_contest_dotnet.Models
 {
     public class Tweeter
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public string Id { get; set; }
+        public int LinkedinUserId { get; set; }
         public string Name { get; set; }
     }
 }
