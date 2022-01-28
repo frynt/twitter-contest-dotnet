@@ -7,13 +7,13 @@
     <RootNamespace>twitter_contest_dotnet</RootNamespace>
     <UserSecretsId>bf5086db-a9f5-447c-a5b0-805efd2e5b8b</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Models\TweeterLinkedin.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="Dtos\TweeterTwitterDto.cs" />
+    <None Include="Models\Contest.cs" />
+    <None Include="Models\Duel.cs" />
     <None Include="Models\Tweeter.cs" />
   </ItemGroup>
 

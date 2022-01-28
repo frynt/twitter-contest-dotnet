@@ -34,7 +34,7 @@ namespace twitter_contest_dotnet.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TweeterDto>>> GetTweeter([FromQuery] PagingParameterModel pagingParameterModel)
         {
-            var tweetersSource = (from tweeter in _context.Tweeter.OrderBy(tweeter => tweeter.TwitterUserId) select tweeter).AsQueryable();
+            var tweetersSource = (from tweeter in _context.Tweeter.OrderBy(tweeter => tweeter.Name) select tweeter).AsQueryable();
             // Get's No of Rows Count   
             int count = tweetersSource.Count();
 
@@ -87,6 +87,7 @@ namespace twitter_contest_dotnet.Controllers
         public async Task<ActionResult<TweeterDto>> GetTweeter(string id)
         {
             var tweeter = await _context.Tweeter.FindAsync(id);
+            var tweeterTwitters = await _twitterService.GetUsersByIds(ids: new string[] {id});
 
             if (tweeter == null)
             {
@@ -96,8 +97,9 @@ namespace twitter_contest_dotnet.Controllers
             return Ok(new TweeterDto
             {
                 Id = tweeter.Id,
-                ProfilePictureURL = "lolpicture",
-                Username = "username"
+                ProfilePictureURL = tweeterTwitters.First().ProfilePictureURL,
+                Username = tweeterTwitters.First().Username,
+                Name = tweeterTwitters.First().Name,
             });
         }
 

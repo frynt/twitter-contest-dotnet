@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "twitter-contest-dotnet", "twitter-contest-dotnet.csproj", "{01CA2346-18EF-4EF9-ABF7-CDD0F2AC0FC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "twitter-contest-dotnet", "twitter-contest-dotnet.csproj", "{01CA2346-18EF-4EF9-ABF7-CDD0F2AC0FC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "twitter-contest-dotnet-test", "..\twitter-contest-dotnet-test\twitter-contest-dotnet-test.csproj", "{1AE06F63-C7E3-43DA-B63F-7217D2FCFAA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{01CA2346-18EF-4EF9-ABF7-CDD0F2AC0FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01CA2346-18EF-4EF9-ABF7-CDD0F2AC0FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01CA2346-18EF-4EF9-ABF7-CDD0F2AC0FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AE06F63-C7E3-43DA-B63F-7217D2FCFAA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE06F63-C7E3-43DA-B63F-7217D2FCFAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AE06F63-C7E3-43DA-B63F-7217D2FCFAA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AE06F63-C7E3-43DA-B63F-7217D2FCFAA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

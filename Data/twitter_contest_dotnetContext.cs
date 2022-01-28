@@ -16,5 +16,7 @@ namespace twitter_contest_dotnet.Data
         }
 
         public DbSet<twitter_contest_dotnet.Models.Tweeter> Tweeter { get; set; }
+        public DbSet<twitter_contest_dotnet.Models.Contest> Contest { get; set; }
+        public DbSet<twitter_contest_dotnet.Models.Duel> Duel { get; set; }
     }
 }
