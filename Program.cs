@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 using twitter_contest_dotnet.Data;
+using twitter_contest_dotnet.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<twitter_contest_dotnetContext>(options =>
@@ -12,6 +15,18 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<ITwitterService, TwitterService>();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+        {
+            builder.WithOrigins("http://localhost:8080")
+                //.AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 var app = builder.Build();
 
@@ -23,6 +38,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 

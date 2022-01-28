@@ -1,4 +1,4 @@
-﻿namespace twitter_contest_dotnet.Models
+﻿namespace twitter_contest_dotnet.Dto
 {
     public class TweeterDto
     {

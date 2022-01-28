@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>twitter_contest_dotnet</RootNamespace>
+    <UserSecretsId>bf5086db-a9f5-447c-a5b0-805efd2e5b8b</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Dtos\TweeterLinkedin.cs" />
+    <None Include="Dtos\TweeterTwitterDto.cs" />
     <None Include="Models\Tweeter.cs" />
   </ItemGroup>
 
@@ -25,6 +26,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="TweetinviAPI" Version="5.0.4" />
   </ItemGroup>
 
 </Project>

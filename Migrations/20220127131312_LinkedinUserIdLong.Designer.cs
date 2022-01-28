@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using twitter_contest_dotnet.Data;
 
@@ -10,9 +11,10 @@ using twitter_contest_dotnet.Data;
 namespace twitter_contest_dotnet.Migrations
 {
     [DbContext(typeof(twitter_contest_dotnetContext))]
-    partial class twitter_contest_dotnetContextModelSnapshot : ModelSnapshot
+    [Migration("20220127131312_LinkedinUserIdLong")]
+    partial class LinkedinUserIdLong
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,11 +29,10 @@ namespace twitter_contest_dotnet.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("LinkedinUserId")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("TwitterUserId")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using twitter_contest_dotnet.Data;
+using twitter_contest_dotnet.Dto;
 using twitter_contest_dotnet.Models;
 
 namespace twitter_contest_dotnet.Controllers

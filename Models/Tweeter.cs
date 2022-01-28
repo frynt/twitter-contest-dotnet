@@ -8,7 +8,7 @@ namespace twitter_contest_dotnet.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Id { get; set; }
-        public int LinkedinUserId { get; set; }
+        public string TwitterUserId { get; set; }
         public string Name { get; set; }
     }
 }
