@@ -33,7 +33,7 @@ namespace twitter_contest_dotnet.Controllers
         [HttpPost]
         public async Task<ActionResult<TweeterTwitterDto>> PostTweeterTwitter(TweeterTwitterDto tweeterTwitterDto)
         {
-            twitter_contest_dotnet.Services.User twitterUser = await this._twitterService.getUserByUsernameAsync(tweeterTwitterDto.Username); 
+            twitter_contest_dotnet.Services.User twitterUser = await this._twitterService.GetUserByUsername(tweeterTwitterDto.Username); 
             if (_context.Tweeter.Where(item => item.TwitterUserId == twitterUser.Id).Count() >= 1)
             {
                 return BadRequest(new { error =  "twitterUserId is already present" });
