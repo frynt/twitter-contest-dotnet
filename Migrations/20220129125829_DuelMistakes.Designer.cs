@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using twitter_contest_dotnet.Data;
 
@@ -10,9 +11,10 @@ using twitter_contest_dotnet.Data;
 namespace twitter_contest_dotnet.Migrations
 {
     [DbContext(typeof(twitter_contest_dotnetContext))]
-    partial class twitter_contest_dotnetContextModelSnapshot : ModelSnapshot
+    [Migration("20220129125829_DuelMistakes")]
+    partial class DuelMistakes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

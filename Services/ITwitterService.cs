@@ -4,6 +4,7 @@
     {
         Task<User> GetUserByUsername(string username);
         Task<User[]> GetUsersByIds(string[] ids);
+        Task<int> GetTweetsLike(string twitterUserId);
     }
 
     public class User

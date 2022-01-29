@@ -20,14 +20,14 @@ namespace twitter_contest_dotnet.Controllers
     public class DuelsController : ControllerBase
     {
         private readonly twitter_contest_dotnetContext _context;
-        private readonly DuelService _twitterService;
+        private readonly IDuelService _duelService;
 
         public DuelsController(
             twitter_contest_dotnetContext context,
-            DuelService twiterService)
+            IDuelService duelService)
         {
             _context = context;
-            _twitterService = twiterService;
+            _duelService = duelService;
         }
 
         // GET: api/Duels/5
@@ -46,9 +46,34 @@ namespace twitter_contest_dotnet.Controllers
                 Id = duel.Id,
                 ProposalTweeterAId = duel.ProposalTweeterAId,
                 ProposalTweeterBId = duel.ProposalTweeterBId,
-                TweeterALikes = duel.TweeterALikes,
-                TweeterBLikes = duel.TweeterBLikes
+                TweeterALikes = duel.UserProposalTweeterId != null ? duel.TweeterALikes : null,
+                TweeterBLikes = duel.UserProposalTweeterId != null ? duel.TweeterBLikes : null,
+                isWin = duel.UserProposalTweeterId == duel.ResponseTweeterId,
+                ResponseTweeterId = duel.ResponseTweeterId
             });
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<DuelDto>> PatchDuel(string id,
+        [FromBody] DuelDtoPatch duelDto)
+        {
+            if (duelDto != null)
+            {
+                var duel = this._context.Duel.Find(id);
+
+                duel.UserProposalTweeterId = duelDto.UserProposalTweeterId;
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                _context.SaveChanges();
+                return await this.GetDuel(id);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
         }
     }
 }

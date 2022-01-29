@@ -54,6 +54,15 @@ namespace twitter_contest_dotnet.Services
                 Username = userResponse.Username,
                 Name = userResponse.Name
             }).ToArray();
+        }        
+        public async Task<int> GetTweetsLike(string twitterUserId)
+        {
+            var userResponse = await _twitterClient.Execute.RequestAsync<TweetsV2Response>(query =>
+            {
+                query.Url = $"https://api.twitter.com/2/users/{twitterUserId}/tweets?tweet.fields=public_metrics";
+            });
+            var likes = userResponse.Model.Tweets.Sum(tweetResponse => tweetResponse.PublicMetrics.LikeCount);
+            return likes;
         }
     }
 }

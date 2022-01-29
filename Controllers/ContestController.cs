@@ -20,21 +20,24 @@ namespace twitter_contest_dotnet.Controllers
     public class ContestsController : ControllerBase
     {
         private readonly twitter_contest_dotnetContext _context;
-        private readonly DuelService _twitterService;
+        private readonly ITwitterService _twitterService;
+        private readonly IDuelService _duelService;
 
         public ContestsController(
             twitter_contest_dotnetContext context,
-            DuelService twiterService)
-        {
+            ITwitterService twitterService,
+            IDuelService duelService)
+     {
             _context = context;
-            _twitterService = twiterService;
+            _twitterService = twitterService;
+            _duelService = duelService;
         }
 
         // GET: api/Contests/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ContestDto>> GetContest(string id)
         {
-            var contest = await _context.Contest.FindAsync(id);
+            var contest = await _context.Contest.Include("Duels").FirstAsync(contest => contest.Id == id);
             var contestDto = this._populateContestDto(contest);
 
             if (contest == null)
@@ -49,10 +52,34 @@ namespace twitter_contest_dotnet.Controllers
         public async Task<ActionResult<ContestDto>> CreateContest()
         {
             var contest = (await _context.Contest.AddAsync(new Contest())).Entity;
+            contest.Duels = new List<Duel>();
             _context.SaveChanges();
-            var contestDto = this._populateContestDto(contest);
 
             var tweeters = _context.Tweeter.ToList();
+            var likesByTweeterId = new Dictionary<string, int>();
+            foreach (Tweeter tweeter in tweeters)
+            {
+                var likes = await this._twitterService.GetTweetsLike(tweeter.TwitterUserId);
+                likesByTweeterId.Add(tweeter.Id, likes);
+            }
+            var duelLights = this._duelService.GenerateDuelLights(tweeters, likesByTweeterId);
+            foreach (DuelLight duelLight in duelLights)
+            {
+                var duel = new Duel()
+                {
+                    ContestId = contest.Id,
+                    ProposalTweeterAId = duelLight.TweeterA.Id,
+                    ProposalTweeterBId = duelLight.TweeterB.Id,
+                    ResponseTweeterId = duelLight.LikesTweeterA > duelLight.LikesTweeterB ?
+                        duelLight.TweeterA.Id : duelLight.TweeterB.Id,
+                    TweeterALikes = duelLight.LikesTweeterA,
+                    TweeterBLikes = duelLight.LikesTweeterB,
+                };
+                contest.Duels.Add(duel);
+                _context.Duel.Add(duel);
+            }
+            _context.SaveChanges();
+            var contestDto = this._populateContestDto(contest);
 
 
             return Ok(contestDto);
@@ -62,6 +89,12 @@ namespace twitter_contest_dotnet.Controllers
         {
             var contestDto = new ContestDto();
             contestDto.Id = contest.Id;
+            contestDto.NextDuelsIds = contest.Duels
+                .Where(contest => contest.UserProposalTweeterId == null)
+                .Select(contest => contest.Id).ToArray();
+            contestDto.PreviousDuelsIds = contest.Duels
+            .Where(contest => contest.UserProposalTweeterId != null)
+            .Select(contest => contest.Id).ToArray();
             return contestDto;
         }
     }

@@ -3,7 +3,7 @@
     public class ContestDto
     {
        public  string Id { get; set; }
-        public string[] PreviousDuelIds { get; set; }
-        public string[] NextDuelIds { get; set; }
+        public string[] PreviousDuelsIds { get; set; }
+        public string[] NextDuelsIds { get; set; }
     }
 }

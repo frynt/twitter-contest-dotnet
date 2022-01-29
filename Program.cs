@@ -16,12 +16,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ITwitterService, TwitterService>();
+builder.Services.AddSingleton<IDuelService, DuelService>();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
         {
             builder.WithOrigins("http://localhost:8080")
-                //.AllowAnyMethod()
+                .AllowAnyMethod()
                 .AllowAnyHeader()
                 .WithExposedHeaders("Paging-Headers");
         });

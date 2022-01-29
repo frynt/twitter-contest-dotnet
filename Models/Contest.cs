@@ -8,5 +8,7 @@ namespace twitter_contest_dotnet.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public string Id { get; set; }
+
+        public List<Duel>? Duels { get; set; }
     }
 }

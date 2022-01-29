@@ -87,7 +87,7 @@ namespace twitter_contest_dotnet.Controllers
         public async Task<ActionResult<TweeterDto>> GetTweeter(string id)
         {
             var tweeter = await _context.Tweeter.FindAsync(id);
-            var tweeterTwitters = await _twitterService.GetUsersByIds(ids: new string[] {id});
+            var tweeterTwitters = await _twitterService.GetUsersByIds(ids: new string[] {tweeter.TwitterUserId});
 
             if (tweeter == null)
             {

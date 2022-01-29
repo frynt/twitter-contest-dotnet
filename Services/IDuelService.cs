@@ -5,15 +5,15 @@ namespace twitter_contest_dotnet.Services
 {
     public interface IDuelService
     {
-        DuelLight[] GenerateDuelLights(Tweeter[] tweeter);
+        DuelLight[] GenerateDuelLights(List<Tweeter> tweeters, Dictionary<string, int> likesByTweeterId);
     }
 
     public class DuelLight
     {
-        public string TweeterA { get; set; }
-        public string TweeterB { get; set; }
-        public string LikesTweeterA { get; set; }
-        public string LikesTweeterB { get; set; }
+        public Tweeter TweeterA { get; set; }
+        public Tweeter TweeterB { get; set; }
+        public int LikesTweeterA { get; set; }
+        public int LikesTweeterB { get; set; }
 
     }
 }
